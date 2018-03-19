@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExchangeName>
+   <collectionElement>
+      <names />
+      <types />
+   </collectionElement>
+   <loopedElement>
+      <name>
+         <child-ref />
+         <names />
+         <types />
+      </name>
+      <names />
+      <price>
+         <child-ref />
+         <names />
+         <types />
+      </price>
+      <symbol>
+         <names />
+         <types />
+      </symbol>
+      <types />
+   </loopedElement>
+   <type>scraping</type>
+   <url />
+</ExchangeName>

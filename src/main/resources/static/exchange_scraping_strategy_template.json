@@ -1,0 +1,28 @@
+	{
+	"Exchange-name": {
+		"type":"scraping",
+		"url": "",
+		"collectionElement": {
+			"types": [],
+			"names": []
+		},
+		"loopedElement": {
+			"types": [],
+			"names": [],
+			"symbol": {
+				"types": [],
+				"names": []
+			},
+			"name": {
+				"types": [],
+				"names": [],
+				"child-ref": []
+			},
+			"price": {
+				"types": [],
+				"names": [],
+				"child-ref": []
+			}
+		}
+	}
+}

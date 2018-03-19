@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="Exchange">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="type" type="xs:string"></xs:element>
+				<xs:element name="collectionElementPath">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="path" minOccurs="1">
+								<xs:complexType>
+									<xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+									<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="childDataPath">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="path" minOccurs="1">
+								<xs:complexType>
+									<xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+									<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="baseAssetSymbolPath">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="path" minOccurs="1">
+											<xs:complexType>
+												<xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="childIndex" type="xs:integer"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="baseAssetNamePath">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="path" minOccurs="1">
+											<xs:complexType>
+												<xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="childIndex" type="xs:integer"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="pricePath">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="path" minOccurs="1">
+											<xs:complexType>
+												<xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+												<xs:attribute name="childIndex" type="xs:integer"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

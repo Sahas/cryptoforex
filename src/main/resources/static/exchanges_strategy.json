@@ -1,0 +1,114 @@
+[
+	{
+		"Koinex": {
+			"type": "scraping",
+			"url": "https://koinex.in/",
+			"collectionElement": {
+				"types": [
+					"element",
+					"class",
+					"element"
+				],
+				"names": [
+					"div",
+					"marker-content",
+					"table"
+				]
+			},
+			"loopedElement": {
+				"types": [
+					"element"
+				],
+				"names": [
+					"tr"
+				],
+				"baseAsset": {
+					"types": [
+						"class"
+					],
+					"names": [
+						"extractVal"
+					]
+				},
+				"baseAssetName": {
+					"types": [
+						"element",
+						"element",
+						"element"
+					],
+					"names": [
+						"td",
+						"div",
+						"div"
+					],
+					"child-ref": [
+						"1",
+						"",
+						""
+					]
+				},
+				"price": {
+					"types": [
+						"element"
+					],
+					"names": [
+						"td",
+						"span"
+					],
+					"child-ref": [
+						"2"
+					]
+				}
+			}
+		}
+	},
+	{
+		"CoinDelta": {
+			"type": "api",
+			"baseUri": "coindelta.com",
+			"priceUri": "/api/v1/public/getticker/",
+			"metadata": {
+				"methodType": "GET",
+				"queryParams": [],
+				"postData": []
+			},
+			"price": "Last",
+			"baseAsset": {
+				"attr_name": "MarketName",
+				"operations": [
+					"split"
+				],
+				"args": [
+					"0"
+				]
+			},
+			"peggedAsset": {
+				"attr_name": "MarketName",
+				"operations": [
+					"split"
+				],
+				"args": [
+					"1"
+				]
+			}
+		}
+	},
+	{
+		"Binance": {
+			"type": "api",
+			"baseUri": "api.binance.com",
+			"priceUri": "/api/v3/ticker/bookTicker",
+			"price": "",
+			"name": {
+				"attr_name": "",
+				"operations": [],
+				"args": []
+			},
+			"peggedCoin": {
+				"attr_name": "",
+				"operations": [],
+				"args": []
+			}
+		}
+	}
+]

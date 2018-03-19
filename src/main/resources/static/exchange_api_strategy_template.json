@@ -1,0 +1,23 @@
+{
+	"CoinDelta": {
+		"type": "api",
+		"baseUri": "coindelta.com",
+		"priceUri": "/api/v1/public/getticker/",
+		"metadata": {
+			"methodType": "GET",
+			"queryParams": [],
+			"postData": []
+		},
+		"price": "",
+		"name": {
+			"attr_name": "",
+			"operations": [],
+			"args": []
+		},
+		"peggedCoin": {
+			"attr_name": "",
+			"operations": [],
+			"args": []
+		}
+	}
+}

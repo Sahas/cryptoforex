@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE Exchange>
+<Exchange name="Binance" xmlns="https://www.w3schools.com"
+	xmlns:xsi="urn:Crypto.Forex"
+	xsi:schemaLocation="urn:Crypto.Forex exchange_api_strategy.xsd">
+
+	<type>api</type>
+	<baseUri>api.binance.com</baseUri>
+	<priceUri>/api/v3/ticker/bookTicker</priceUri>
+	<price>
+		<attr_name>bidPrice</attr_name>
+	</price>
+	<baseAsset>
+		<attr_name>symbol</attr_name>
+		<operation>
+			<name>subString</name>
+		</operation>
+	</baseAsset>
+
+	<peggedAsset>
+		<attr_name>symbol</attr_name>
+		<operation>
+			<name>subString</name>
+		</operation>
+	</peggedAsset>
+
+</Exchange>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE Exchange>
+<Exchange name="CoinDelta" xmlns="https://www.w3schools.com"
+	xmlns:xsi="urn:Crypto.Forex"
+	xsi:schemaLocation="urn:Crypto.Forex exchange_api_strategy.xsd">
+
+	<type>api</type>
+	<baseUri>https://coindelta.com</baseUri>
+	<priceUri>api/v1/public/getticker</priceUri>
+	<price>
+		<attr_name>Last</attr_name>
+	</price>
+	<baseAsset>
+		<attr_name>MarketName</attr_name>
+		<operation>
+			<name>split</name>
+			<args>-</args>
+		</operation>
+	</baseAsset>
+
+	<peggedAsset>
+		<attr_name>MarketName</attr_name>
+		<operation>
+			<name>split</name>
+			<args>-</args>
+		</operation>
+	</peggedAsset>
+
+</Exchange>

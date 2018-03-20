@@ -20,6 +20,7 @@ public final class CryptoForexConsts {
 	public static final String NEO = "Neo";
 	public static final String RIPPLE = "Ripple";
 	public static final String BITCOIN_CASH = "BitcoinCash";
+	public static final String RESOURCES_HOME="src/main/resources/";
 	public static final Map<String,String> coinSymMap = new HashMap<>();
 	static {
 		coinSymMap.put(BITCOIN, "BTC");

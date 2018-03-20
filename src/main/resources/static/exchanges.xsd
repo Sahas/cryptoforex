@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="urn:Crypto.Forex" xmlns="urn:Crypto.Forex">
+	<xs:element name="exchanges">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="exchange" maxOccurs="unbounded"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="exchange">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:string"></xs:element>
+				<xs:element name="name" type="xs:string"></xs:element>
+				<xs:element ref="tradingCountries"></xs:element>
+				<xs:element ref="coins"></xs:element>
+				<xs:element ref="coinPrices"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tradingCountries">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="country" type="xs:anyType"
+								maxOccurs="unbounded">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+	<xs:element name="coins">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="coin" type="xs:anyType" maxOccurs="unbounded">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="coinPrices">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="coinPrice" type="xs:anyType" maxOccurs="unbounded">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

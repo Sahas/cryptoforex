@@ -8,12 +8,12 @@ import java.util.Map;
 import com.crypto.forex.utils.CryptoForexConsts;
 
 public enum Exchanges {
-	COINBASE(CryptoForexConsts.COINBASE, Currencies.US, new ArrayList<>(), new HashMap<>()), 
-	BINANCE(CryptoForexConsts.BINANCE, Currencies.US, new ArrayList<>(), new HashMap<>()), 
-	KOINEX(CryptoForexConsts.KOINEX, Currencies.INDIA, new ArrayList<>(), new HashMap<>()), 
-	COINDELTA(CryptoForexConsts.COINDELTA, Currencies.INDIA, new ArrayList<>(), new HashMap<>()), 
-	BITBNS(CryptoForexConsts.BITBNS, Currencies.INDIA, new ArrayList<>(), new HashMap<>()), 
-	ZEBPAY(CryptoForexConsts.ZEBPAY, Currencies.INDIA, new ArrayList<>(), new HashMap<>());
+	COINBASE(CryptoForexConsts.COINBASE, Currencies.USD, new ArrayList<>(), new HashMap<>()), 
+	BINANCE(CryptoForexConsts.BINANCE, Currencies.USD, new ArrayList<>(), new HashMap<>()), 
+	KOINEX(CryptoForexConsts.KOINEX, Currencies.RUPEE, new ArrayList<>(), new HashMap<>()), 
+	COINDELTA(CryptoForexConsts.COINDELTA, Currencies.RUPEE, new ArrayList<>(), new HashMap<>()), 
+	BITBNS(CryptoForexConsts.BITBNS, Currencies.RUPEE, new ArrayList<>(), new HashMap<>()), 
+	ZEBPAY(CryptoForexConsts.ZEBPAY, Currencies.RUPEE, new ArrayList<>(), new HashMap<>());
 	
 	String name;
 	Currencies country;

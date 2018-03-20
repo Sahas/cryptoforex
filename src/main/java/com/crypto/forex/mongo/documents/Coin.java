@@ -7,10 +7,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Coin {
   
   @Id
-  private final String sym;
-  private final String name;
+  private String sym;
+  private String name;
   
-  public Coin(String sym, String name) {
+  public Coin() {}
+
+  public Coin(final String sym, final String name) {
     this.sym = sym;
     this.name = name;
   }

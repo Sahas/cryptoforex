@@ -13,6 +13,6 @@ public class CoinDataController {
 	
 	@RequestMapping(path="/coindata", method= {RequestMethod.GET})
 	public List<Coins> fetchCoinData(){
-		
+		return null;
 	}
 }

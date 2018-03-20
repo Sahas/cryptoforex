@@ -1,10 +1,9 @@
 package com.crypto.forex.entities;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.assertj.core.util.Arrays;
 
 import com.crypto.forex.utils.CryptoForexConsts;
 
@@ -60,6 +59,6 @@ public enum Coins {
 	}
 	
 	public static List<Coins> getAllData(){
-		return Arrays.nonNullElementsIn(Coins.values());
+		return Arrays.asList(Coins.values());
 	}
 }

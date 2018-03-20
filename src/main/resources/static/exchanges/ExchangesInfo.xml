@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE Exchange>
+<exchanges xmlns="urn:Crypto.Forex"
+	xmlns:xsi="urn:Crypto.Forex">
+	<exchange>
+		<id>binance</id>
+		<name>binance</name>
+		<tradingCountries>
+			<name>USA</name>
+			<currency>USD</currency>
+		</tradingCountries>
+		<coins></coins>
+		<coinPrices></coinPrices>
+	</exchange>
+</exchanges>

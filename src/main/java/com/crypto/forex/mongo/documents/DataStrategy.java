@@ -15,8 +15,6 @@ public class DataStrategy {
   
   private String feesApi;
   
-  private String scrapingPageUri;
-  
-  private 
+  private String scrapingPageUri; 
   
 }

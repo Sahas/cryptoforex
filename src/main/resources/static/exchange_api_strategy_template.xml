@@ -5,8 +5,8 @@
 	xsi:schemaLocation="urn:Crypto.Forex exchange_api_strategy.xsd">
 
 	<type>api</type>
-	<baseUri>api.binance.com</baseUri>
-	<priceUri>/api/v3/ticker/bookTicker</priceUri>
+	<baseUri>https://api.binance.com</baseUri>
+	<priceUri>api/v3/ticker/bookTicker</priceUri>
 	<price>
 		<attr_name>bidPrice</attr_name>
 	</price>

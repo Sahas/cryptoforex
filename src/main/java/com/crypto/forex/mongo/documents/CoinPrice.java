@@ -10,10 +10,12 @@ public class CoinPrice {
   
   private Map<Coin, Double> peggedPrices;
   
+  public CoinPrice() {}
+
   public Coin getCoin() {
     return coin;
   }
-  public void setCoin(Coin coin) {
+  public void setCoin(final Coin coin) {
     this.coin = coin;
   }
   

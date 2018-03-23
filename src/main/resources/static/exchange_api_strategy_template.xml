@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE Exchange>
-<Exchange name="Binance" xmlns="https://www.w3schools.com"
-	xmlns:xsi="urn:Crypto.Forex"
-	xsi:schemaLocation="urn:Crypto.Forex exchange_api_strategy.xsd">
+<ExchangeDef exchange="Binance" xmlns="urn:Crypto.Forex"
+	xmlns:xsi="urn:Crypto.Forex">
 
 	<type>api</type>
 	<baseUri>https://api.binance.com</baseUri>
@@ -24,4 +23,4 @@
 		</operation>
 	</peggedAsset>
 
-</Exchange>
+</ExchangeDef>

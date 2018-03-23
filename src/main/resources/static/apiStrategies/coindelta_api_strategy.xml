@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
-<!DOCTYPE Exchange>
-<Exchange name="CoinDelta" xmlns="https://www.w3schools.com"
-	xmlns:xsi="urn:Crypto.Forex"
-	xsi:schemaLocation="urn:Crypto.Forex exchange_api_strategy.xsd">
+<ExchangeApiDef exchange="CoinDelta" xmlns="urn:Crypto.Forex"
+	xmlns:xsi="urn:Crypto.Forex">
 
 	<type>api</type>
 	<baseUri>https://coindelta.com</baseUri>
@@ -10,20 +8,22 @@
 	<price>
 		<attr_name>Last</attr_name>
 	</price>
-	<baseAsset>
+	<baseCoin>
 		<attr_name>MarketName</attr_name>
 		<operation>
 			<name>split</name>
 			<args>-</args>
+			<args>0</args>
 		</operation>
-	</baseAsset>
+	</baseCoin>
 
-	<peggedAsset>
+	<peggedCoin>
 		<attr_name>MarketName</attr_name>
 		<operation>
 			<name>split</name>
 			<args>-</args>
+			<args>1</args>
 		</operation>
-	</peggedAsset>
+	</peggedCoin>
 
-</Exchange>
+</ExchangeApiDef>

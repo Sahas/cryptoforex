@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.crypto.forex.entities.Coins;
@@ -22,7 +23,7 @@ public class Exchange {
   @XmlElement(required = true)
   private String name;
 
-  @XmlElement(required = true)
+  @XmlElement(namespace = "urn:Crypto.Forex", required = true)
   private List<Countries> tradingCountries = new ArrayList<>();
 
   @XmlElement(namespace = "urn:Crypto.Forex", required = true)
@@ -51,7 +52,7 @@ public class Exchange {
    *     {@link String }
    *     
    */
-  public void setId(String value) {
+  public void setId(final String value) {
     this.id = value;
   }
 
@@ -75,7 +76,7 @@ public class Exchange {
    *     {@link String }
    *     
    */
-  public void setName(String value) {
+  public void setName(final String value) {
     this.name = value;
   }
 
@@ -99,19 +100,19 @@ public class Exchange {
    *     {@link Exchange.TradingCountries }
    *     
    */
-  public void setTradingCountries(List<Countries> value) {
+  public void setTradingCountries(final List<Countries> value) {
     this.tradingCountries = value;
   }
 
-  public void addTradingCountry(Countries country) {
+  public void addTradingCountry(final Countries country) {
     this.tradingCountries.add(country);
   }
 
-  public void addTradingCountry(String countryName) {
+  public void addTradingCountry(final String countryName) {
     this.tradingCountries.add(Countries.valueOf(countryName));
   }
 
-  public void removeTradingCountry(Countries country) {
+  public void removeTradingCountry(final Countries country) {
     this.tradingCountries.remove(country);
   }
 
@@ -135,15 +136,15 @@ public class Exchange {
    *     {@link Coins }
    *     
    */
-  public void setCoins(List<Coin> value) {
+  public void setCoins(final List<Coin> value) {
     this.coins = value;
   }
 
-  public void addCoin(Coin coin) {
+  public void addCoin(final Coin coin) {
     this.coins.add(coin);
   }
 
-  public void removeCoin(Coin coin) {
+  public void removeCoin(final Coin coin) {
     this.coins.remove(coin);
   }
 
@@ -167,16 +168,30 @@ public class Exchange {
    *     {@link CoinPrices }
    *     
    */
-  public void setCoinPrices(List<CoinPrice> value) {
+  public void setCoinPrices(final List<CoinPrice> value) {
     this.coinPrices = value;
   }
 
-  public void addCoinPrice(CoinPrice coinPrice) {
+  public void addCoinPrice(final CoinPrice coinPrice) {
     this.coinPrices.add(coinPrice);
   }
 
-  public void removeCoinPrice(CoinPrice coinPrice) {
+  public void removeCoinPrice(final CoinPrice coinPrice) {
     this.coinPrices.remove(coinPrice);
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder(17, 37).append(this.id).build();
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (obj == null) {
+      return false;
+    }
+    final Exchange other = (Exchange) obj;
+    return this.getId().equalsIgnoreCase(other.getId());
   }
 
 }

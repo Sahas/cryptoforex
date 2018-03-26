@@ -11,4 +11,9 @@ public class JsonUtilsTest {
   // final ObjectNode root = mapper.createObjectNode();
   //
   // }
+
+  private static final String bitbns =
+      "{\"BTC\":{\"highest_buy_bid\":585400,\"lowest_sell_bid\":589000,\"last_traded_price\":589000}";
+
+
 }

@@ -6,15 +6,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Coin {
-  
+
   @Id
   private String sym;
+
   private String name;
-  
+
   public Coin() {}
 
   public Coin(final String sym, final String name) {
-    this.sym = sym;
+    this.setSym(sym);
     this.name = name;
   }
 
@@ -22,9 +23,17 @@ public class Coin {
     return sym;
   }
 
+  public void setSym(final String sym) {
+    this.sym = sym.toUpperCase();
+  }
+
   public String getName() {
     return name;
   }  
+
+  public void setName(final String name) {
+    this.name = name;
+  }
 
   @Override
   public int hashCode() {

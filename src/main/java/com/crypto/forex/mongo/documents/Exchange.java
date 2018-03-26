@@ -32,6 +32,14 @@ public class Exchange {
   @XmlElement(namespace = "urn:Crypto.Forex", required = true)
   private List<CoinPrice> coinPrices = new ArrayList<>();
 
+  public Exchange() {};
+
+  public Exchange(final String id, final String name, final List<Countries> tradingCountries) {
+    this.id = id;
+    this.name = name;
+    this.tradingCountries = tradingCountries;
+  }
+
   /**
    * Gets the value of the id property.
    * 

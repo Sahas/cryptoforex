@@ -43,6 +43,11 @@ public class ExchangeCoinPrice {
 
   public ExchangeCoinPrice() {}
 
+  public ExchangeCoinPrice(final Exchange exchange, final List<CoinPrice> coinprices) {
+    this.exchange = exchange;
+    this.coinprices = coinprices;
+  }
+
   public Exchange getExchange() {
     return exchange;
   }

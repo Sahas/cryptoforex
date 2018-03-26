@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class CoinData {
   public static final String[] coins =
-      {"BTC", "ETH", "XRP", "BCH", "LTC", "ADA", "NEO", "XLM", "EOS",
+      {"BTC", "ETH", "XRP", "BCH", "LTC", "ADA", "NEO", "XLM", "EOS", "IOTA", "YOYO", "WAN",
       "MIOTA", "XMR", "DASH", "XEM", "TRX", "USDT", "ETC", "VEN", "QTUM", "LSK", "OMG", "NANO",
       "BTG", "ICX", "ZEC", "BNB", "DGD", "PPT", "STEEM", "STRAT", "BCN", "XVG", "WAVES", "SC",
       "MKR", "BTS", "RHOC", "DOGE", "SNT", "REP", "AE", "DCR", "WTC", "BTM", "AION", "ONT", "ZIL",
@@ -139,6 +139,8 @@ public class CoinData {
 
   public static final Map<String, String> coinMap = fetchMapFromCoins();
 
+  public static final Map<String, String> coinOverrideMap = fetchOverrideCoinsMap();
+
   public static Map<String, String> fetchMapFromCoins() {
     final Map<String, String> coinMap = new HashMap<>();
     for (int i = 0; i < coins.length; i++) {
@@ -149,5 +151,18 @@ public class CoinData {
     }
 
     return coinMap;
+  }
+
+  public static final Map<String,String> fetchOverrideCoinsMap(){
+    final Map<String,String> overrideMap = new HashMap<>();
+    overrideMap.put("BCC", "BCH");
+    return overrideMap;
+  }
+
+  public static final String getOverrideCoinValue(final String coinSym) {
+    if (coinSym == null) {
+      return coinSym;
+    }
+    return coinOverrideMap.getOrDefault(coinSym.toUpperCase(), coinSym);
   }
 }

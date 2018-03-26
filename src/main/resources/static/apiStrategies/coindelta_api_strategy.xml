@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ExchangeApiDef exchange="CoinDelta" xmlns="urn:Crypto.Forex"
+<ExchangeApiDef exchange="coindelta" xmlns="urn:Crypto.Forex"
 	xmlns:xsi="urn:Crypto.Forex">
 
 	<type>api</type>
@@ -15,6 +15,9 @@
 			<args>-</args>
 			<args>0</args>
 		</operation>
+		<operation>
+			<name>upperCase</name>
+		</operation>
 	</baseCoin>
 
 	<peggedCoin>
@@ -23,6 +26,9 @@
 			<name>split</name>
 			<args>-</args>
 			<args>1</args>
+		</operation>
+		<operation>
+			<name>upperCase</name>
 		</operation>
 	</peggedCoin>
 

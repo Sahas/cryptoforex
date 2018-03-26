@@ -16,4 +16,25 @@
 		<coins></coins>
 		<coinPrices></coinPrices>
 	</exchange>
+	<exchange>
+		<id>bitbns</id>
+		<name>bitbns</name>
+		<tradingCountries>INDIA</tradingCountries>
+		<coins></coins>
+		<coinPrices></coinPrices>
+	</exchange>
+	<exchange>
+		<id>koinex</id>
+		<name>koinex</name>
+		<tradingCountries>INDIA</tradingCountries>
+		<coins></coins>
+		<coinPrices></coinPrices>
+	</exchange>
+	<exchange>
+		<id>bitfinex</id>
+		<name>bitfinex</name>
+		<tradingCountries>USA</tradingCountries>
+		<coins></coins>
+		<coinPrices></coinPrices>
+	</exchange>
 </exchanges>

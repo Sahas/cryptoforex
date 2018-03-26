@@ -33,7 +33,7 @@ public class ApiScraperTest {
     System.out.println("Output from our XML File: ");
     final Unmarshaller um = context.createUnmarshaller();
     final File f =
-        new File(CryptoForexConsts.RESOURCES_HOME + "static/strategies/binance_api_strategy.xml");
+        new File(CryptoForexConsts.EXCHNAGES_API_DEF_FOLDER + "binance_api_strategy.xml");
     final ExchangeApiDef exApiDef = (ExchangeApiDef) um.unmarshal(f);
     final ApiScraper apiScraper = new ApiScraper();
     final List<CoinPrice> coinPrices = apiScraper.scrape(exApiDef);

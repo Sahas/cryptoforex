@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ExchangeApiDef exchange="Binance" xmlns="urn:Crypto.Forex"
+<ExchangeApiDef exchange="binance" xmlns="urn:Crypto.Forex"
 	xmlns:xsi="urn:Crypto.Forex">
 
 	<type>api</type>

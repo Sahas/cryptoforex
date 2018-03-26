@@ -1,7 +1,8 @@
+
 package com.crypto.forex.utils;
 
 public enum Currencies {
-  USD("USD"), INR("INR"), USDT("USDT");
+  USD("USD"), INR("INR"), USDT("USDT"), EUR("EUR");
   
   private String symbol;
   

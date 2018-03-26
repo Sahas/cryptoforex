@@ -7,47 +7,48 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import com.crypto.forex.MasterBean;
+import com.crypto.forex.exchange.api.ExchangeApiManager;
 import com.crypto.forex.mongo.documents.Coin;
 import com.crypto.forex.mongo.documents.CoinPrice;
+import com.crypto.forex.mongo.documents.ExchangeCoinPrice;
+import com.crypto.forex.mongo.documents.FullExchangeCoinPriceData;
+import com.crypto.forex.repositories.FullExchangeCoinPriceDataRepository;
 import com.crypto.forex.utils.Currencies;
 
 @Component
 public class ParseExchangesTask {
-  private static final Logger logger = LoggerFactory.getLogger(ParseExchangesTask.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ParseExchangesTask.class);
 
   @Autowired
-  private MasterBean masterBean;
+  private FullExchangeCoinPriceDataRepository repository;
 
-  @Scheduled(cron = "0 0/5 * * * ?")
+  @Autowired
+  private List<String> availableExchanges;
+
+  @Autowired
+  ExchangeApiManager exchangeApiManager;
+
+  @Scheduled(cron = "0 0/10 * * * ?")
   public void fetchAndPutAllExchangeDataInDB() {
-    final List<ExchangeParseDef> allParseDefs = masterBean.getAllparseDefsForAvailableExchanges();
-    final Map<Coin, List<CoinPrice>> allCoinCurrencyPriceListMap = new HashMap<>();
-    for (final ExchangeParseDef parseDef : allParseDefs) {
-      final List<CoinPrice> coinPrices = ScraperDeterminer.getScraperFor(parseDef).scrape(parseDef);
+    final List<ExchangeCoinPrice> allExchangeCoinPrices = new ArrayList<>();
+    for (final String exchangeId : availableExchanges) {
+      final List<CoinPrice> coinPrices = exchangeApiManager.getApiDataOf(exchangeId);
       final List<CoinPrice> currencyPrices = getCurrencyPricesOfCoins(coinPrices);
-      // store in DB
-      for (final CoinPrice coinCurrencyPrice : currencyPrices) {
-        final Coin currCoin = coinCurrencyPrice.getBasecoin();
-        if (allCoinCurrencyPriceListMap.containsKey(currCoin)) {
-          allCoinCurrencyPriceListMap.get(currCoin).add(coinCurrencyPrice);
-        } else {
-          final List<CoinPrice> currencyCoinPrices = new ArrayList<CoinPrice>();
-          currencyCoinPrices.add(coinCurrencyPrice);
-          allCoinCurrencyPriceListMap.put(currCoin, currencyCoinPrices);
-        }
-      }
+      allExchangeCoinPrices
+          .add(new ExchangeCoinPrice(currencyPrices.get(0).getExchange(), currencyPrices));
     }
-
-    // store in db
+    LOGGER.debug("Storing Coin Prices in DB");
+    repository.save(new FullExchangeCoinPriceData(allExchangeCoinPrices));
   }
 
   public List<CoinPrice> getCurrencyPricesOfCoins(final List<CoinPrice> rawCoinPrices) {
+    LOGGER.debug("Calculating currency prices for coins");
     final Map<Coin, List<CoinPrice>> coinCurrencyPriceMap = new HashMap<>();
     final Set<CoinPrice> currencyPricesOfCoins = new HashSet<>();
 
@@ -80,5 +81,10 @@ public class ParseExchangesTask {
       }
     }
     return new ArrayList<>(currencyPricesOfCoins);
+  }
+
+  @PostConstruct
+  public void onStartup() {
+    fetchAndPutAllExchangeDataInDB();
   }
 }

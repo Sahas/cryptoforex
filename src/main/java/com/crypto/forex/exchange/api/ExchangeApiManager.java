@@ -26,12 +26,14 @@ public class ExchangeApiManager {
   public CoinPrice getCoinPriceFromExchangeCoinPriceData(
       final ExchangeCoinPriceJson exchangeCoinPrice) {
     if (exchangeCoinPrice.getBaseCoin() != null && exchangeCoinPrice.getPeggedCoin() != null
+        && exchangeCoinPrice.getPrice() != null
         && CoinData.coinMap.containsKey(exchangeCoinPrice.getBaseCoin())
         && CoinData.coinMap.containsKey(exchangeCoinPrice.getPeggedCoin())) {
       return new CoinPrice(exchangeCoinPrice.getExchangeId(),
           CoinData.getOverrideCoinValue(exchangeCoinPrice.getBaseCoin()),
           CoinData.getOverrideCoinValue(exchangeCoinPrice.getPeggedCoin()),
-          exchangeCoinPrice.getPrice());
+          CoinData.getOverrideCoinValue(exchangeCoinPrice.getPeggedCoin()),
+          exchangeCoinPrice.getPrice(), exchangeCoinPrice.getPrice());
     }
     else {
       LOGGER.debug("Skipped Coin price creation for :" + exchangeCoinPrice.getBaseCoin() + "-"
@@ -68,7 +70,10 @@ public class ExchangeApiManager {
         return getApiDataOfBitbns();
       case "bitfinex":
         return getApiDataOfBitfinex();
-
+      // case "kraken":
+      // return getApiDataOfKraken();
+      case "hitbtc":
+        return getApiDataOfHitbtc();
       default:
         return null;
     }
@@ -187,6 +192,26 @@ public class ExchangeApiManager {
 
   }
 
+  // public List<CoinPrice> getApiDataOfKraken(){
+  // final String symbolsApi = "https://api.bitfinex.com/v1/symbols";
+  // final UriComponents symbolsUri = UriComponentsBuilder.fromHttpUrl(symbolsApi).build();
+  // final MultiValueMap<String, String> headerMap = new LinkedMultiValueMap<>();
+  // headerMap.add("User-Agent",
+  // "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95
+  // Safari/537.11");
+  // final RequestEntity symbolsEntity =
+  // new RequestEntity(headerMap, HttpMethod.GET, symbolsUri.toUri());
+  // final ResponseEntity<String[]> symResponse = rest.exchange(symbolsEntity, String[].class);
+  // final String[] symbols = symResponse.getBody();
+  // }
 
+
+  public List<CoinPrice> getApiDataOfHitbtc() {
+    final String api = "https://api.hitbtc.com/api/2/public/ticker";
+    final UriComponents uri = UriComponentsBuilder.fromHttpUrl(api).build();
+    final ResponseEntity<HitbtcJson[]> response =
+        rest.getForEntity(uri.toUriString(), HitbtcJson[].class);
+    return getCoinPricesFromResponseData(response.getBody());
+  }
 
 }

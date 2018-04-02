@@ -61,7 +61,8 @@ public class CoinDataHandler {
     return roundedOffPercentage.doubleValue();
   }
 
-  public Map<String, List<CoinPrice>> getLatestCoinPricesInAllExchanges() {
+  public Map<String, List<CoinPrice>> getLatestCoinPricesInExchanges(
+      final List<String> exchangeIds) {
     final List<CoinPrice> currencyPrices = new ArrayList<>();
     final Map<String, List<CoinPrice>> allCoinCurrencyPriceListMap = new HashMap<>();
     logger.debug("Querying repository for latest Exchange Coin Data");

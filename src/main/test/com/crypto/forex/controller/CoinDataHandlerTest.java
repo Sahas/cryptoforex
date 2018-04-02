@@ -53,10 +53,10 @@ public class CoinDataHandlerTest {
     final Coin normalizedCoin = new Coin("INR", "INR");
     final Map<String, List<CoinPrice>> latestCoinPricesInAllExchanges = new HashMap<>();
     final List<CoinPrice> coinPrices = new ArrayList<>();
-    coinPrices.add(new CoinPrice("Binance", "BTC", "USD", 8500.0));
-    coinPrices.add(new CoinPrice("Koinex", "BTC", "INR", 600000.0));
-    coinPrices.add(new CoinPrice("CoinDelta", "BTC", "INR", 610000.0));
-    coinPrices.add(new CoinPrice("GDAX", "BTC", "USD", 8400.0));
+    coinPrices.add(new CoinPrice("Binance", "BTC", "USD", "USD", 8500.0, 8500.0));
+    coinPrices.add(new CoinPrice("Koinex", "BTC", "INR", "INR", 600000.0, 600000.0));
+    coinPrices.add(new CoinPrice("CoinDelta", "BTC", "INR", "INR", 610000.0, 610000.0));
+    coinPrices.add(new CoinPrice("GDAX", "BTC", "USD", "USD", 8400.0, 8400.0));
     latestCoinPricesInAllExchanges.put("BTC", coinPrices);
     final Set<JsonNode> allNormalizedCoinPricesForBTCSet =
         handler.getCoinPricesInAllExchangesWithNormalizedPrices(latestCoinPricesInAllExchanges,
@@ -98,7 +98,7 @@ public class CoinDataHandlerTest {
         .thenReturn(results);
     when(results.getContent()).thenReturn(fullDataList);
     final Map<String, List<CoinPrice>> coinDataForBinanceExchange =
-        handler.getLatestCoinPricesInAllExchanges();
+        handler.getLatestCoinPricesInExchanges(null);
     assertThat(coinDataForBinanceExchange.size()).isEqualTo(4);
     assertThat(coinDataForBinanceExchange.containsKey("BTC"));
     assertThat(coinDataForBinanceExchange.containsKey("ETH"));
@@ -116,19 +116,19 @@ public class CoinDataHandlerTest {
 
   private List<CoinPrice> getCoinPricesSameCoin() {
     final List<CoinPrice> coinPrices = new ArrayList<>();
-    coinPrices.add(new CoinPrice("Binance", "BTC", "USD", 8500.0));
-    coinPrices.add(new CoinPrice("Koinex", "BTC", "INR", 600000.0));
-    coinPrices.add(new CoinPrice("CoinDelta", "BTC", "INR", 610000.0));
-    coinPrices.add(new CoinPrice("GDAX", "BTC", "USD", 8400.0));
+    coinPrices.add(new CoinPrice("Binance", "BTC", "USD", "USD", 8500.0, 8500.0));
+    coinPrices.add(new CoinPrice("Koinex", "BTC", "INR", "INR", 600000.0, 600000.0));
+    coinPrices.add(new CoinPrice("CoinDelta", "BTC", "INR", "INR", 610000.0, 610000.0));
+    coinPrices.add(new CoinPrice("GDAX", "BTC", "USD", "INR", 8400.0, 8400.0));
     return coinPrices;
   }
 
   private List<CoinPrice> getCoinPricesSameExchange() {
     final List<CoinPrice> coinPrices = new ArrayList<>();
-    coinPrices.add(new CoinPrice("Binance", "BTC", "USD", 8500.0));
-    coinPrices.add(new CoinPrice("Binance", "ETH", "USD", 500.0));
-    coinPrices.add(new CoinPrice("Binance", "TRX", "USD", 0.04));
-    coinPrices.add(new CoinPrice("Binance", "XRP", "USD", 0.67));
+    coinPrices.add(new CoinPrice("Binance", "BTC", "USD", "USD", 8500.0, 8500.0));
+    coinPrices.add(new CoinPrice("Binance", "ETH", "USD", "USD", 500.0, 500.0));
+    coinPrices.add(new CoinPrice("Binance", "TRX", "USD", "USD", 0.04, 0.04));
+    coinPrices.add(new CoinPrice("Binance", "XRP", "USD", "USD", 0.67, 0.67));
     return coinPrices;
   }
 }

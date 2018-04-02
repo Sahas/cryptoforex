@@ -17,7 +17,7 @@ public class KoinexJson extends AbstractExchangeCoinPriceJson {
 
   @Override
   public Double getPrice() {
-    return (askPrice + bidPrice) / 2;
+    return bidPrice;
   }
 
   @Override

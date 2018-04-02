@@ -53,7 +53,7 @@ public class CoindeltaJson extends AbstractExchangeCoinPriceJson {
 
   @Override
   public Double getPrice() {
-    return (ask + bid) / 2;
+    return bid;
   }
 
   @Override

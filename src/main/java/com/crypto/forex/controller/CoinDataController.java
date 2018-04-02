@@ -1,5 +1,6 @@
 package com.crypto.forex.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,10 @@ public class CoinDataController {
   private CoinDataHandler handler;
 
   @RequestMapping(path = "/exchangeCoinPrices", method = {RequestMethod.GET})
-  public Map<String, Set<JsonNode>> getCoinPriceDataFromExchanges(
+  public Map<String, Set<JsonNode>> getCoinPriceDataOfExchanges(
+      @RequestParam final List<String> exchanges,
       @RequestParam final String baseCurrency) {
     return handler.getCoinPricesInAllExchangesWithNormalizedPrices(
-        handler.getLatestCoinPricesInAllExchanges(), new Coin(baseCurrency, baseCurrency));
+        handler.getLatestCoinPricesInExchanges(null), new Coin(baseCurrency, baseCurrency));
   }
 }

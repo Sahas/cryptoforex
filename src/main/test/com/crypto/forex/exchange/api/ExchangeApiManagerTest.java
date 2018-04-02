@@ -167,4 +167,38 @@ public class ExchangeApiManagerTest {
     assertThat(bitfinexData.get(1).getPeggedcoin().getSym()).isEqualTo("USD");
     assertThat(bitfinexData.get(1).getPrice()).isEqualTo((159.21 + 159.3) / 2);
   }
+
+
+  @SuppressWarnings("unchecked")
+  @Test
+  public void apiMangerShouldReturnHitbtcDataIfHitbtcIsPassed() {
+    final HitbtcJson[] hitbtcJsonArr = new HitbtcJson[2];
+    final HitbtcJson bitcoinData = new HitbtcJson();
+    bitcoinData.setAsk("8584.02000000");
+    bitcoinData.setBid("8585.00000000");
+    bitcoinData.setSymbol("BTCUSDT");
+    final HitbtcJson ethData = new HitbtcJson();
+    ethData.setAsk("522.61000000");
+    ethData.setBid("521.77000000");
+    ethData.setSymbol("ETHUSDT");
+    hitbtcJsonArr[0] = bitcoinData;
+    hitbtcJsonArr[1] = ethData;
+
+    final Class<ResponseEntity<HitbtcJson[]>> responseClass =
+        (Class<ResponseEntity<HitbtcJson[]>>) (Class<?>) ResponseEntity.class;
+    final ResponseEntity<HitbtcJson[]> response = Mockito.mock(responseClass);
+    when(rest.getForEntity(any(String.class), any(BinanceJson[].class.getClass())))
+        .thenReturn(response);
+    when(response.getBody()).thenReturn(hitbtcJsonArr);
+    final List<CoinPrice> hitbtcData = apiManager.getApiDataOf("hitbtc");
+    assertThat(hitbtcData).isNotEmpty();
+    assertThat(hitbtcData.size()).isEqualTo(2);
+    assertThat(hitbtcData.get(0).getBasecoin().getSym()).isEqualTo("BTC");
+    assertThat(hitbtcData.get(1).getBasecoin().getSym()).isEqualTo("ETH");
+    assertThat(hitbtcData.get(0).getPeggedcoin().getSym()).isEqualTo("USDT");
+    assertThat(hitbtcData.get(1).getPeggedcoin().getSym()).isEqualTo("USDT");
+    assertThat(hitbtcData.get(0).getPrice()).isEqualTo(8584.02000000);
+    assertThat(hitbtcData.get(1).getPrice()).isEqualTo(522.61000000);
+
+  }
 }

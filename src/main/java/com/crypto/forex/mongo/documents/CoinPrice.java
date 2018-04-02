@@ -12,16 +12,23 @@ public class CoinPrice {
 
   private Double price;
 
+  private Coin originalPeggedCoin;
+
+  private Double originalPeggedPrice;
+
   public CoinPrice(final String exchangeId, final String baseCoinSym, final String peggedCoinSym,
-      final Double price) {
+      final String originalPeggedCoinSym, final Double price, final Double originalPeggedPrice) {
     final Exchange exchange = new Exchange();
     exchange.setId(exchangeId);
     final Coin baseCoin = new Coin(baseCoinSym, baseCoinSym);
     final Coin peggedCoin = new Coin(peggedCoinSym, peggedCoinSym);
+    final Coin originalPeggedCoin = new Coin(originalPeggedCoinSym, originalPeggedCoinSym);
     this.exchange = exchange;
     this.setBasecoin(baseCoin);
     this.setPeggedcoin(peggedCoin);
+    this.setOriginalPeggedCoin(originalPeggedCoin);
     this.price = price;
+    this.originalPeggedPrice = originalPeggedPrice;
   }
 
   public CoinPrice() {}
@@ -58,6 +65,23 @@ public class CoinPrice {
     this.peggedcoin = peggedcoin;
   }
 
+
+  public Coin getOriginalPeggedCoin() {
+    return originalPeggedCoin;
+  }
+
+  public void setOriginalPeggedCoin(final Coin originalPeggedCoin) {
+    this.originalPeggedCoin = originalPeggedCoin;
+  }
+
+  public Double getOriginalPeggedPrice() {
+    return originalPeggedPrice;
+  }
+
+  public void setOriginalPeggedPrice(final Double originalPeggedPrice) {
+    this.originalPeggedPrice = originalPeggedPrice;
+  }
+
   @Override
   public boolean equals(final Object obj) {
     if (obj == null) {
@@ -68,11 +92,13 @@ public class CoinPrice {
     return this.exchange.equals(other.getExchange())
         && this.getBasecoin().equals(other.getBasecoin())
         && this.getPeggedcoin().equals(other.getPeggedcoin());
+    // && this.getOriginalPeggedCoin().equals(other.getOriginalPeggedCoin());
 
   }
 
   @Override
   public int hashCode() {
+    // append(this.originalPeggedCoin)
     return new HashCodeBuilder(17, 37).append(this.exchange).append(this.basecoin)
         .append(this.peggedcoin).build();
   }

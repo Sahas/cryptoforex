@@ -9,12 +9,26 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import com.crypto.forex.mongo.documents.Exchange;
 import com.crypto.forex.repositories.ExchangeRepository;
 
-@EnableMongoRepositories(basePackages={"com.crypto.forex.repositories"})
+@EnableMongoRepositories(basePackages = {"com.crypto.forex.repositories"})
 @Configuration
 public class MongoDBConfig {
 
   @Autowired
   MasterBean masterbean;
+  //
+  // @Bean
+  // public MongoClient mongoClient(@Value("${spring.data.mongodb.host}") final String host,
+  // @Value("${spring.data.mongodb.port}") final int port) {
+  // return new MongoClient(host, port);
+  // }
+  //
+  // @Bean
+  // public MongoTemplate mongoTemplate(@Value("${spring.data.mongodb.host}") final String host,
+  // @Value("${spring.data.mongodb.port}") final int port,
+  // @Value("${spring.data.mongodb.database}") final String database) {
+  // return new MongoTemplate(mongoClient(host, port), database);
+  // }
+
 
   @Bean
   public CommandLineRunner commandLineRunner(final ExchangeRepository exchangeRepository) {

@@ -2,6 +2,7 @@ package com.crypto.forex.exchange.api;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
@@ -13,6 +14,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import com.crypto.forex.mongo.documents.CoinPrice;
 import com.crypto.forex.parse.StringOperations;
 import com.crypto.forex.utils.CoinData;
@@ -33,7 +35,8 @@ public class ExchangeApiManager {
           CoinData.getOverrideCoinValue(exchangeCoinPrice.getBaseCoin()),
           CoinData.getOverrideCoinValue(exchangeCoinPrice.getPeggedCoin()),
           CoinData.getOverrideCoinValue(exchangeCoinPrice.getPeggedCoin()),
-          exchangeCoinPrice.getPrice(), exchangeCoinPrice.getPrice());
+          exchangeCoinPrice.getCurrentBidPrice(), exchangeCoinPrice.getCurrentAskPrice(),
+          exchangeCoinPrice.getCurrentBidPrice(), exchangeCoinPrice.getCurrentAskPrice());
     }
     else {
       LOGGER.debug("Skipped Coin price creation for :" + exchangeCoinPrice.getBaseCoin() + "-"

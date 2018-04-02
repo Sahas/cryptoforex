@@ -1,7 +1,11 @@
 package com.crypto.forex.mongo.documents;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -60,5 +64,24 @@ public class ExchangeCoinPrice {
 
   public void setCoinprices(final List<CoinPrice> coinprices) {
     this.coinprices = coinprices;
+  }
+
+  public void removeCoinprices(Predicate<? super CoinPrice> filter) {
+    this.coinprices.removeIf(filter);
+  }
+
+  public void removeCoinprices(List<String> exchangeIds) {
+
+  }
+
+  public Set<String> getTradedCoins() {
+    Set<String> tradedCoins = new HashSet<>();
+    if (this.coinprices == null || this.coinprices.isEmpty()) {
+      return tradedCoins;
+    }
+    for (CoinPrice coinprice : this.coinprices) {
+      tradedCoins.add(coinprice.getBasecoin().getSym());
+    }
+    return tradedCoins;
   }
 }

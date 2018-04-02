@@ -63,4 +63,14 @@ public class BinanceJson extends AbstractExchangeCoinPriceJson {
     return (askPrice + bidPrice) / 2;
   }
 
+  @Override
+  public Double getCurrentAskPrice() {
+    return Double.valueOf(this.askPrice);
+  }
+
+  @Override
+  public Double getCurrentBidPrice() {
+    return Double.valueOf(this.bidPrice);
+  }
+
 }

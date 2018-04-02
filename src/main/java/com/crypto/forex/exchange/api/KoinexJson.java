@@ -71,4 +71,14 @@ public class KoinexJson extends AbstractExchangeCoinPriceJson {
     this.tradedVolume = tradedVolume;
   }
 
+  @Override
+  public Double getCurrentAskPrice() {
+    return this.askPrice;
+  }
+
+  @Override
+  public Double getCurrentBidPrice() {
+    return this.bidPrice;
+  }
+
 }

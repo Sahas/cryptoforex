@@ -70,4 +70,14 @@ public class CoindeltaJson extends AbstractExchangeCoinPriceJson {
   public Double getTradedVolume() {
     return null;
   }
+
+  @Override
+  public Double getCurrentAskPrice() {
+    return this.ask;
+  }
+
+  @Override
+  public Double getCurrentBidPrice() {
+    return this.bid;
+  }
 }

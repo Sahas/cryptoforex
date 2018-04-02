@@ -6,6 +6,10 @@ public interface ExchangeCoinPriceJson {
 
   Double getPrice();
 
+  Double getCurrentAskPrice();
+
+  Double getCurrentBidPrice();
+
   String getBaseCoin();
 
   String getPeggedCoin();

@@ -15,8 +15,6 @@ public class BitbnsJson extends AbstractExchangeCoinPriceJson {
   private Double askPrice;
   private Double lastPrice;
   private Double tradedVolume;
-
-
   
   @Override
   public Double getPrice() {
@@ -72,6 +70,16 @@ public class BitbnsJson extends AbstractExchangeCoinPriceJson {
 
   public void setTradedVolume(final Double tradedVolume) {
     this.tradedVolume = tradedVolume;
+  }
+
+  @Override
+  public Double getCurrentAskPrice() {
+    return this.askPrice;
+  }
+
+  @Override
+  public Double getCurrentBidPrice() {
+    return this.bidPrice;
   }
 
 }

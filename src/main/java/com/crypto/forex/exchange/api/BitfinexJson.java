@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@ExchangeApi(exchange = "bitfinex")
+// @ExchangeApi(exchange = "bitfinex")
 public class BitfinexJson extends AbstractExchangeCoinPriceJson {
 
   private String baseCoin;
@@ -82,5 +82,15 @@ public class BitfinexJson extends AbstractExchangeCoinPriceJson {
 
   public void setPeggedCoin(final String peggedCoin) {
     this.peggedCoin = peggedCoin;
+  }
+
+  @Override
+  public Double getCurrentAskPrice() {
+    return this.ask;
+  }
+
+  @Override
+  public Double getCurrentBidPrice() {
+    return this.bid;
   }
 }

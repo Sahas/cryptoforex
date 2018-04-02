@@ -30,4 +30,16 @@ public class KrakenJson extends AbstractExchangeCoinPriceJson {
     return null;
   }
 
+  @Override
+  public Double getCurrentAskPrice() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Double getCurrentBidPrice() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

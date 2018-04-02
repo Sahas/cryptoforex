@@ -4,7 +4,7 @@ import com.crypto.forex.parse.StringOperations;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-// @ExchangeApi(exchange = "hitbtc")
+@ExchangeApi(exchange = "hitbtc")
 public class HitbtcJson extends AbstractExchangeCoinPriceJson {
 
   private String ask;
@@ -74,6 +74,22 @@ public class HitbtcJson extends AbstractExchangeCoinPriceJson {
 
   public void setSymbol(final String symbol) {
     this.symbol = symbol;
+  }
+
+  @Override
+  public Double getCurrentAskPrice() {
+    if (ask == null) {
+      return null;
+    }
+    return Double.valueOf(ask);
+  }
+
+  @Override
+  public Double getCurrentBidPrice() {
+    if (bid == null) {
+      return null;
+    }
+    return Double.valueOf(bid);
   }
 
 }

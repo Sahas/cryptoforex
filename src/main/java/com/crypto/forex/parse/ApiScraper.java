@@ -45,7 +45,7 @@ public class ApiScraper implements Scraper {
             && CoinData.coinMap.containsKey(peggedCoinSym)) {
           coinPrices
               .add(new CoinPrice(exchangeId, baseCoinSym, peggedCoinSym, peggedCoinSym, price,
-                  price));
+                  price, price, price));
         } else {
           logger.debug("Skipped Coin price creation for :" + exchangeId + ":"
               + rawCoinPrice.get(apiDef.getBaseCoin().getAttrName()).asText());

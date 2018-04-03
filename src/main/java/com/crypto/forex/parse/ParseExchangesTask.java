@@ -7,15 +7,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import com.crypto.forex.exchange.api.ExchangeApiManager;
 import com.crypto.forex.mongo.documents.Coin;
 import com.crypto.forex.mongo.documents.CoinPrice;
@@ -41,6 +38,7 @@ public class ParseExchangesTask {
   public void fetchAndPutAllExchangeDataInDB() {
     final List<ExchangeCoinPrice> allExchangeCoinPrices = new ArrayList<>();
     for (final String exchangeId : availableExchanges) {
+      LOGGER.debug("Exchange Id : " + exchangeId);
       final List<CoinPrice> coinPrices = exchangeApiManager.getApiDataOf(exchangeId);
       final List<CoinPrice> currencyPrices = getCurrencyPricesOfCoins(coinPrices);
       allExchangeCoinPrices
@@ -72,6 +70,10 @@ public class ParseExchangesTask {
 
     for (final CoinPrice rawCoinPrice : rawCoinPrices) {
       final Coin peggedCoin = rawCoinPrice.getPeggedcoin();
+      LOGGER.debug("Fetching currency prices for coin : " + rawCoinPrice.getBasecoin().getSym());
+      if (rawCoinPrice.getAskPrice() == null || rawCoinPrice.getBidPrice() == null) {
+        continue;
+      }
       if (coinCurrencyPriceMap.containsKey(peggedCoin)) {
         for (final CoinPrice peggedCoinCurrencyPrice : coinCurrencyPriceMap.get(peggedCoin)) {
           final Double currencyAskPriceValue =

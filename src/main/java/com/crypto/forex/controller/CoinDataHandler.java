@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
-import org.assertj.core.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
-
 import com.crypto.forex.mongo.documents.Coin;
 import com.crypto.forex.mongo.documents.CoinPrice;
 import com.crypto.forex.mongo.documents.FullExchangeCoinPriceData;
@@ -49,7 +46,7 @@ public class CoinDataHandler {
     Double currPrice = 0.0;
     for (final CoinPrice coinprice : coinPrices) {
       currPrice = conversionUtils.getExchangePriceFor(coinprice.getPeggedcoin().getSym(),
-          currencyCoin.getSym()) * coinprice.getPrice();
+          currencyCoin.getSym()) * coinprice.getAskPrice();
       if (currPrice < lowest) {
         lowest = currPrice;
       }
@@ -108,7 +105,7 @@ public class CoinDataHandler {
               Comparator.comparingDouble(node -> node.get("gainPercent").asDouble())));
       coinPrices.forEach(coinPrice -> {
         final ObjectNode normalizedCoinPrice = mapper.valueToTree(coinPrice);
-        final Double normalizedPrice = coinPrice.getPrice()
+        final Double normalizedPrice = coinPrice.getAskPrice()
             * conversionUtils.getExchangePriceFor(coinPrice.getPeggedcoin().getSym(),
                 normalizedCoin.getSym());
         normalizedCoinPrice.set("normalizedCoin", mapper.valueToTree(normalizedCoin));
@@ -121,7 +118,8 @@ public class CoinDataHandler {
     return coinPricesInAllExchangesWithNormalizedPrices;
   }
 
-  public Map<String, Set<JsonNode>> getBestTransferPricesInExchanges(String from, String to) {
-    getLatestCoinPricesInExchanges(Arrays.asList(from, to));
+  public Map<String, Set<JsonNode>> getBestTransferPricesInExchanges(final String from, final String to) {
+    // getLatestCoinPricesInExchanges(Arrays.asList(from, to));
+    return null;
   }
 }

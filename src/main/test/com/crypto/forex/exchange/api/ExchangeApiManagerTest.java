@@ -71,8 +71,8 @@ public class ExchangeApiManagerTest {
     assertThat(binanceData.get(1).getBasecoin().getSym()).isEqualTo("ETH");
     assertThat(binanceData.get(0).getPeggedcoin().getSym()).isEqualTo("USDT");
     assertThat(binanceData.get(1).getPeggedcoin().getSym()).isEqualTo("USDT");
-    assertThat(binanceData.get(0).getPrice()).isEqualTo((8584.02000000 + 8585.00000000) / 2);
-    assertThat(binanceData.get(1).getPrice()).isEqualTo((522.61000000 + 521.77000000) / 2);
+    assertThat(binanceData.get(0).getAskPrice()).isEqualTo((8584.02000000 + 8585.00000000) / 2);
+    assertThat(binanceData.get(1).getAskPrice()).isEqualTo((522.61000000 + 521.77000000) / 2);
 
   }
 
@@ -112,10 +112,10 @@ public class ExchangeApiManagerTest {
     assertThat(bitbnsData.size()).isEqualTo(23);
     assertThat(bitbnsData.get(0).getBasecoin().getSym()).isEqualTo("BTC");
     assertThat(bitbnsData.get(0).getPeggedcoin().getSym()).isEqualTo("INR");
-    assertThat(bitbnsData.get(0).getPrice()).isEqualTo((581300.0 + 590997.0) / 2);
+    assertThat(bitbnsData.get(0).getAskPrice()).isEqualTo((581300.0 + 590997.0) / 2);
     assertThat(bitbnsData.get(1).getBasecoin().getSym()).isEqualTo("XRP");
     assertThat(bitbnsData.get(1).getPeggedcoin().getSym()).isEqualTo("INR");
-    assertThat(bitbnsData.get(1).getPrice()).isEqualTo((43.67 + 43.68) / 2);
+    assertThat(bitbnsData.get(1).getAskPrice()).isEqualTo((43.67 + 43.68) / 2);
   }
 
   @SuppressWarnings("unchecked")
@@ -134,10 +134,10 @@ public class ExchangeApiManagerTest {
     assertThat(koinexData.size()).isEqualTo(4);
     assertThat(koinexData.get(0).getBasecoin().getSym()).isEqualTo("ETH");
     assertThat(koinexData.get(0).getPeggedcoin().getSym()).isEqualTo("INR");
-    assertThat(koinexData.get(0).getPrice()).isEqualTo((35708.0 + 35501.0) / 2);
+    assertThat(koinexData.get(0).getAskPrice()).isEqualTo((35708.0 + 35501.0) / 2);
     assertThat(koinexData.get(1).getBasecoin().getSym()).isEqualTo("BTC");
     assertThat(koinexData.get(1).getPeggedcoin().getSym()).isEqualTo("INR");
-    assertThat(koinexData.get(1).getPrice()).isEqualTo((589990.0 + 588000.0) / 2);
+    assertThat(koinexData.get(1).getAskPrice()).isEqualTo((589990.0 + 588000.0) / 2);
   }
 
   @SuppressWarnings("unchecked")
@@ -162,10 +162,10 @@ public class ExchangeApiManagerTest {
     assertThat(bitfinexData.size()).isEqualTo(3);
     assertThat(bitfinexData.get(0).getBasecoin().getSym()).isEqualTo("BTC");
     assertThat(bitfinexData.get(0).getPeggedcoin().getSym()).isEqualTo("USD");
-    assertThat(bitfinexData.get(0).getPrice()).isEqualTo((8495.0 + 8495.1) / 2);
+    assertThat(bitfinexData.get(0).getAskPrice()).isEqualTo((8495.0 + 8495.1) / 2);
     assertThat(bitfinexData.get(1).getBasecoin().getSym()).isEqualTo("LTC");
     assertThat(bitfinexData.get(1).getPeggedcoin().getSym()).isEqualTo("USD");
-    assertThat(bitfinexData.get(1).getPrice()).isEqualTo((159.21 + 159.3) / 2);
+    assertThat(bitfinexData.get(1).getAskPrice()).isEqualTo((159.21 + 159.3) / 2);
   }
 
 
@@ -197,8 +197,8 @@ public class ExchangeApiManagerTest {
     assertThat(hitbtcData.get(1).getBasecoin().getSym()).isEqualTo("ETH");
     assertThat(hitbtcData.get(0).getPeggedcoin().getSym()).isEqualTo("USDT");
     assertThat(hitbtcData.get(1).getPeggedcoin().getSym()).isEqualTo("USDT");
-    assertThat(hitbtcData.get(0).getPrice()).isEqualTo(8584.02000000);
-    assertThat(hitbtcData.get(1).getPrice()).isEqualTo(522.61000000);
+    assertThat(hitbtcData.get(0).getAskPrice()).isEqualTo(8584.02000000);
+    assertThat(hitbtcData.get(1).getAskPrice()).isEqualTo(522.61000000);
 
   }
 }

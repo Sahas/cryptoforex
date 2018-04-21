@@ -85,7 +85,7 @@ public class ParseExchangesTask {
                   peggedCoinCurrencyPrice.getPeggedcoin().getSym(),
                   rawCoinPrice.getPeggedcoin().getSym(), currencyBidPriceValue,
                   currencyAskPriceValue,
-                  currencyBidPriceValue, currencyAskPriceValue);
+                  rawCoinPrice.getAskPrice(), rawCoinPrice.getBidPrice());
           currencyPricesOfCoins.add(currCoinCurrencyPrice);
         }
       }

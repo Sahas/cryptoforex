@@ -2,6 +2,7 @@ package com.crypto.forex.exchange.api;
 
 import com.crypto.forex.parse.StringOperations;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ExchangeApi(exchange = "hitbtc")
@@ -10,6 +11,7 @@ public class HitbtcJson extends AbstractExchangeCoinPriceJson {
   private String ask;
   private String bid;
   private String last;
+  @JsonProperty("volumeQuote")
   private String volume;
   private String symbol;
 

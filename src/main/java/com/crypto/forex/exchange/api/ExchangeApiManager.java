@@ -1,6 +1,10 @@
 package com.crypto.forex.exchange.api;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -19,6 +23,7 @@ import com.crypto.forex.mongo.documents.CoinPrice;
 import com.crypto.forex.parse.StringOperations;
 import com.crypto.forex.utils.CoinData;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class ExchangeApiManager {
@@ -77,6 +82,8 @@ public class ExchangeApiManager {
       // return getApiDataOfKraken();
       case "hitbtc":
         return getApiDataOfHitbtc();
+      case "cryptopia":
+          return getApiDataOfCryptopia();
       default:
         return null;
     }
@@ -214,7 +221,62 @@ public class ExchangeApiManager {
     final UriComponents uri = UriComponentsBuilder.fromHttpUrl(api).build();
     final ResponseEntity<HitbtcJson[]> response =
         rest.getForEntity(uri.toUriString(), HitbtcJson[].class);
-    return getCoinPricesFromResponseData(response.getBody());
+    HitbtcJson[] fullCoinPriceData = response.getBody();
+    List<HitbtcJson> coinPriceList = new LinkedList<HitbtcJson>(Arrays.asList(fullCoinPriceData));
+    removeAllUSDPeggedCoinsExceptBTCAndETH(coinPriceList);
+    removeAllCoinsFromListWithLowLiquidity(coinPriceList, 3);
+    return getCoinPricesFromResponseData(coinPriceList.toArray(new HitbtcJson[0]));
   }
+  
+  private <T extends AbstractExchangeCoinPriceJson> void removeAllCoinsFromListWithLowLiquidity(List<T> coinPriceList, int i) {
+	  Iterator<T> iter = coinPriceList.iterator();
+	  while(iter.hasNext()) {
+		  T coinPrice = iter.next();
+		  System.out.println("CoinDetails: " + coinPrice.getBaseCoin() + ":" + coinPrice.getPeggedCoin() + ": Volume = " + coinPrice.getTradedVolume()) ;
+		  if(coinPrice.getTradedVolume() < i) {
+			  iter.remove();
+		  }
+	  }
+	
+}
+
+public List<CoinPrice> getApiDataOfCryptopia() {
+	  final String usdApi = "https://www.cryptopia.co.nz/api/GetMarkets/USDT";
+	  final String btcApi = "https://www.cryptopia.co.nz/api/GetMarkets/BTC";
+	  UriComponents uri = UriComponentsBuilder.fromHttpUrl(usdApi).build();
+	  ResponseEntity<JsonNode> response =
+		        rest.getForEntity(uri.toUriString(), JsonNode.class);
+	  JsonNode exchangeData = response.getBody().get("Data");
+	  CryptopiaJson[] fullUSDPriceData;
+	try {
+		fullUSDPriceData = new ObjectMapper().readValue(exchangeData.toString(), CryptopiaJson[].class);
+		 uri = UriComponentsBuilder.fromHttpUrl(btcApi).build();
+		  response = rest.getForEntity(uri.toUriString(), JsonNode.class);
+		  exchangeData = response.getBody().get("Data");
+		  CryptopiaJson[] fullBTCPriceData = new ObjectMapper().readValue(exchangeData.toString(), CryptopiaJson[].class);
+		  List<CryptopiaJson> coinPriceList = new LinkedList<CryptopiaJson>(Arrays.asList(fullUSDPriceData));
+		  removeAllUSDPeggedCoinsExceptBTCAndETH(coinPriceList);
+		  coinPriceList.addAll(Arrays.asList(fullBTCPriceData));
+		  removeAllCoinsFromListWithLowLiquidity(coinPriceList, 3);
+		  return getCoinPricesFromResponseData(coinPriceList.toArray(new CryptopiaJson[0]));
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}	  
+	return null;
+	  
+  }
+  
+   public <T extends AbstractExchangeCoinPriceJson> void removeAllUSDPeggedCoinsExceptBTCAndETH(List<T> coinPriceList) {
+	   Iterator<T> iter = coinPriceList.iterator();
+	   
+	   while(iter.hasNext()) {
+		   T coinPrice = iter.next();
+		   System.out.println("CoinDetails: " + coinPrice.getBaseCoin() + ":" + coinPrice.getPeggedCoin());
+		   if(coinPrice!= null && (coinPrice.getPeggedCoin() == null || coinPrice.getBaseCoin() == null || "USD".equalsIgnoreCase(coinPrice.getPeggedCoin())|| "USDT".equalsIgnoreCase(coinPrice.getPeggedCoin())) && !("BTC".equalsIgnoreCase(coinPrice.getBaseCoin()))){
+			   iter.remove();
+		   }
+	   }
+   }
 
 }
